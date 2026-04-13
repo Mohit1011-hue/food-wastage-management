@@ -260,20 +260,21 @@ elif page == '📊 SQL Query Results':
             ORDER BY Total_Donated DESC''', 
  
         # Replace CURDATE() and DATE_ADD with SQLite version
+# Q14 — replace CURDATE() with SQLite version
 'Q14: Food Expiring in Next 7 Days': '''
     SELECT Food_Name, Quantity, Expiry_Date, Location, Food_Type, Meal_Type
     FROM food_listings
     WHERE Expiry_Date BETWEEN date('now') AND date('now', '+7 days')
     ORDER BY Expiry_Date ASC''',
 
-# Replace DATE_FORMAT with SQLite version
+# Q15 — replace DATE_FORMAT with SQLite version
 'Q15: Monthly Trend of Claims': '''
     SELECT strftime('%Y-%m', Timestamp) AS Month,
            COUNT(c.Claim_ID) AS Total_Claims,
            SUM(f.Quantity) AS Total_Quantity_Claimed
     FROM claims c JOIN food_listings f ON c.Food_ID = f.Food_ID
     GROUP BY strftime('%Y-%m', Timestamp)
-    ORDER BY Month ASC''', 
+    ORDER BY Month ASC''',
     } 
  
     selected_query = st.selectbox('📋 Select a Query to View', list(queries.keys())) 
